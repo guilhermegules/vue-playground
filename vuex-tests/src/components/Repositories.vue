@@ -1,0 +1,27 @@
+<template>
+  <main class="container">
+    <div v-for="repo in repos" :key="repo.id" class="card my-3">
+      <h5 class="card-header">{{ repo.create_at }}</h5>
+      <div class="card-body">
+        <h5 class="card-tile">{{ repo.name }}</h5>
+        <p class="card-text">{{ repo.description }}</p>
+        <a :href="repo.url" class="btn btn-primary">Visit Repo URL</a>
+        <p class="mt-5 mb-0">
+          Has been forked: {{ repo.fork ? "True" : "False" }}
+        </p>
+      </div>
+    </div>
+  </main>
+</template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState({
+    repos: "repos"
+  })
+};
+</script>
+
+<style scoped></style>
