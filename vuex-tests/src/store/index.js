@@ -5,54 +5,30 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    repos: [
-      {
-        id: Math.floor(Math.random() * 10000000),
-        name: "guilhermegules/Vue_Playground/vuex-tests",
-        description: "A repository displaying vuex best practices.",
-        url: "https://github.com/guilhermegules",
-        language: "JavaScript",
-        has_issues: false,
-        created_at: "2020-04-10T02:29:42Z",
-        updated_at: "2020-04-10T02:39:42Z",
-        fork: true
-      },
-      {
-        id: Math.floor(Math.random() * 10000000),
-        name: "guilhermegules/Vue_Playground/vuex-tests",
-        description: "A repository displaying vuex best practices.",
-        url: "https://github.com/guilhermegules",
-        language: "JavaScript",
-        has_issues: false,
-        created_at: "2020-04-10T02:29:42Z",
-        updated_at: "2020-04-10T02:39:42Z",
-        fork: true
-      },
-      {
-        id: Math.floor(Math.random() * 10000000),
-        name: "guilhermegules/Vue_Playground/vuex-tests",
-        description: "A repository displaying vuex best practices.",
-        url: "https://github.com/guilhermegules",
-        language: "JavaScript",
-        has_issues: false,
-        created_at: "2020-04-10T02:29:42Z",
-        updated_at: "2020-04-10T02:39:42Z",
-        fork: true
-      },
-      {
-        id: Math.floor(Math.random() * 10000000),
-        name: "guilhermegules/Vue_Playground/vuex-tests",
-        description: "A repository displaying vuex best practices.",
-        url: "https://github.com/guilhermegules",
-        language: "JavaScript",
-        has_issues: false,
-        created_at: "2020-04-10T02:29:42Z",
-        updated_at: "2020-04-10T02:39:42Z",
-        fork: true
-      }
-    ]
+    repos: []
   },
-  mutations: {},
-  actions: {},
-  modules: {}
+  getters: {
+    repoFilterCreatedAt: state =>
+      state.repos.map(repo => repo.created_at.substring(0, 10))
+  },
+  mutations: {
+    SET_REPOS: (state, payload) => {
+      state.repos = payload;
+      console.log(
+        "%cAction completed",
+        "color: white; background: green; font-weight: bold;"
+      );
+      console.timeLog();
+    }
+  },
+  actions: {
+    async getRepos({ commit }) {
+      const response = await fetch(
+        "https://api.github.com/users/guilhermegules/repos"
+      );
+      const repos = await response.json();
+      commit("SET_REPOS", repos);
+      console.assert(repos.length >= 1, "Repos not returned");
+    }
+  }
 });

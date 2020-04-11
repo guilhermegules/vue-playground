@@ -1,24 +1,6 @@
-# vuex-tests
+## Vuex testing debugging
 
-## Project setup
-```
-yarn install
-```
+- Using console log to get the creation of the components and their renderings, for better understanding.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Install all dependencies `npm install` or `yarn`;
+- Run application `npm run serve` or `yarn serve`.

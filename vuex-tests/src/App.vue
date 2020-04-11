@@ -8,6 +8,19 @@
   </div>
 </template>
 
+<script>
+export default {
+  created() {
+    this.$store.dispatch("getRepos");
+    console.log(
+      "%cDispatched Action",
+      "color: white; background: green; font-weight: bold"
+    );
+    console.time();
+  }
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

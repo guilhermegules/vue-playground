@@ -1,7 +1,7 @@
 <template>
   <main class="container">
-    <div v-for="repo in repos" :key="repo.id" class="card my-3">
-      <h5 class="card-header">{{ repo.create_at }}</h5>
+    <div v-for="(repo, i) in repos" :key="repo.id" class="card my-3">
+      <h5 class="card-header">{{ repoFilterCreatedAt[i] }}</h5>
       <div class="card-body">
         <h5 class="card-tile">{{ repo.name }}</h5>
         <p class="card-text">{{ repo.description }}</p>
@@ -15,12 +15,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
-  computed: mapState({
-    repos: "repos"
-  })
+  computed: {
+    ...mapState(["repos"]),
+    ...mapGetters(["repoFilterCreatedAt"])
+  }
 };
 </script>
 
